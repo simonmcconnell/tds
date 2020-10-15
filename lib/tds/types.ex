@@ -1602,6 +1602,7 @@ defmodule Tds.Types do
         else
           {trunc(parsed_fsec * :math.pow(10, 6 - scale)), scale}
         end
+
       Time.from_erl!({hour, min, sec}, {us, scale})
     else
       {hour, min, sec, parsed_fsec}
@@ -1652,10 +1653,10 @@ defmodule Tds.Types do
     {bin, scale}
   end
 
-  defp microsecond_to_fsec({us, 6}),
+  def microsecond_to_fsec({us, 6}),
     do: us
 
-  defp microsecond_to_fsec({us, scale}),
+  def microsecond_to_fsec({us, scale}),
     do: trunc(us / :math.pow(10, 6 - scale))
 
   # DateTime2
@@ -1756,7 +1757,8 @@ defmodule Tds.Types do
           |> Integer.to_string()
           |> String.pad_leading(2, "0")
 
-        {:ok, datetime, ^offset} = DateTime.from_iso8601("#{str}#{sign}#{h}:#{m}")
+        {:ok, datetime, ^offset} =
+          DateTime.from_iso8601("#{str}#{sign}#{h}:#{m}")
 
         datetime
     end

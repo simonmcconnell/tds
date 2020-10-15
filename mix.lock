@@ -24,5 +24,5 @@
   "tds_encoding": {:hex, :tds_encoding, "1.0.0", "1784d7aa26c315bb4f62b926cb7f3331bfc4eee15508f3d3ab48bc0ac9802a61", [:mix], [{:rustler, "~> 0.21.0", [hex: :rustler, repo: "hexpm", optional: false]}], "hexpm", "c60a8400232a22444be0757b94e91ea9fe3b6b3faa8d22c7afd38217214c082a"},
   "toml": {:hex, :toml, "0.5.2", "e471388a8726d1ce51a6b32f864b8228a1eb8edc907a0edf2bb50eab9321b526", [:mix], [], "hexpm", "f1e3dabef71fb510d015fad18c0e05e7c57281001141504c6b69d94e99750a07"},
   "tzdata": {:hex, :tzdata, "1.0.3", "73470ad29dde46e350c60a66e6b360d3b99d2d18b74c4c349dbebbc27a09a3eb", [:mix], [{:hackney, "~> 1.0", [hex: :hackney, repo: "hexpm", optional: false]}], "hexpm", "a6e1ee7003c4d04ecbd21dd3ec690d4c6662db5d3bbdd7262d53cdf5e7c746c1"},
-  "unicode_util_compat": {:hex, :unicode_util_compat, "0.4.1", "d869e4c68901dd9531385bb0c8c40444ebf624e60b6962d95952775cac5e90cd", [:rebar3], [], "hexpm", "1d1848c40487cdb0b30e8ed975e34e025860c02e419cb615d255849f3427439d"},
+  "unicode_util_compat": {:hex, :unicode_util_compat, "0.5.0", "8516502659002cec19e244ebd90d312183064be95025a319a6c7e89f4bccd65b", [:rebar3], [], "hexpm", "d48d002e15f5cc105a696cf2f1bbb3fc72b4b770a184d8420c8db20da2674b38"},
 }
