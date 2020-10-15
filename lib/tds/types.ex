@@ -1406,7 +1406,7 @@ defmodule Tds.Types do
   end
 
   def encode_data(@tds_data_type_datetimeoffsetn, value, _attr) do
-    # Logger.debug "encode_data_datetimeoffsetn #{inspect value}"
+    # Logger.debug("encode_data_datetimeoffsetn #{inspect(value)}")
     data = encode_datetimeoffset(value)
 
     if data == nil do
@@ -1518,7 +1518,7 @@ defmodule Tds.Types do
     date = :calendar.gregorian_days_to_date(@year_1900_days + days)
 
     milliseconds = round(secs300 * 10 / 3)
-    usec = rem(milliseconds, 1_000)
+    us = rem(milliseconds, 1_000)
 
     seconds = div(milliseconds, 1_000)
 
@@ -1527,11 +1527,11 @@ defmodule Tds.Types do
     if use_elixir_calendar_types?() do
       NaiveDateTime.from_erl!(
         {date, {h, m, s}},
-        {usec * 1_000, 3},
+        {us * 1_000, 3},
         Calendar.ISO
       )
     else
-      {date, {h, m, s, usec}}
+      {date, {h, m, s, us}}
     end
   end
 
@@ -1542,8 +1542,8 @@ defmodule Tds.Types do
 
   def encode_datetime(%NaiveDateTime{} = dt) do
     {date, {h, m, s}} = NaiveDateTime.to_erl(dt)
-    {msec, _} = dt.microsecond
-    encode_datetime({date, {h, m, s, msec}})
+    {us, _} = dt.microsecond
+    encode_datetime({date, {h, m, s, us}})
   end
 
   def encode_datetime({date, {h, m, s}}),
@@ -1596,14 +1596,13 @@ defmodule Tds.Types do
     parsed_fsec = trunc(parsed_fsec - sec * fs_per_sec)
 
     if use_elixir_calendar_types?() do
-      {usec, scale} =
+      {us, scale} =
         if scale > 6 do
           {trunc(parsed_fsec / 10), 6}
         else
           {trunc(parsed_fsec * :math.pow(10, 6 - scale)), scale}
         end
-
-      Time.from_erl!({hour, min, sec}, {usec, scale})
+      Time.from_erl!({hour, min, sec}, {us, scale})
     else
       {hour, min, sec, parsed_fsec}
     end
@@ -1622,7 +1621,6 @@ defmodule Tds.Types do
   def encode_time(%Time{} = t) do
     {h, m, s} = Time.to_erl(t)
     {_, scale} = t.microsecond
-    # fix ms
     fsec = microsecond_to_fsec(t.microsecond)
 
     encode_time({h, m, s, fsec}, scale)
